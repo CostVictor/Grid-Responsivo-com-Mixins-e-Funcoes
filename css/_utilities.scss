@@ -1,0 +1,15 @@
+@function calculatePercentage($columns) {
+  @return 100% / $columns
+}
+
+@mixin responsiveGrid($breakpoints) {
+  @each $breakpoint, $value in $breakpoints {
+    @if $breakpoint == 'default' {
+      grid-template-columns: repeat($value, calculatePercentage($value));
+    } @else {
+      @media (max-width: #{$breakpoint}px) {
+        grid-template-columns: repeat($value, calculatePercentage($value))
+      }
+    }
+  }
+}
